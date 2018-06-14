@@ -1,0 +1,27 @@
+{
+  "name": "smart-foundation-contract",
+  "version": "1.0.0",
+  "description": "Solidity Contract for the Smart Foundation",
+  "main": "y",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "zeppelin-solidity": "^1.10.0"
+  },
+  "devDependencies": {
+    "ganache-cli": "^6.0.3",
+    "truffle": "^4.1.11"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smart-foundation/contract.git"
+  },
+  "author": "Smart Foundation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smart-foundation/contract/issues"
+  },
+  "homepage": "https://github.com/smart-foundation/contract#readme"
+}
