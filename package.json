@@ -7,9 +7,17 @@
     "test": "test"
   },
   "dependencies": {
+    "babel-eslint": "^8.0.1",
     "zeppelin-solidity": "^1.10.0"
   },
   "devDependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-register": "^6.26.0",
+    "chai": "^4.0.2",
+    "chai-as-promised": "^7.0.0",
+    "chai-bignumber": "^2.0.0",
     "ganache-cli": "^6.0.3",
     "truffle": "^4.1.11"
   },
