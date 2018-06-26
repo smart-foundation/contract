@@ -4,7 +4,4 @@ import "../PayableToken.sol";
 
 contract PayableTokenMock is PayableToken {
 
-  constructor(address _fundsWallet) PayableToken(_fundsWallet) public {
-  }
-
 }

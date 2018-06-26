@@ -14,18 +14,17 @@ require('chai')
 contract('PayableToken', accounts => {
 
     beforeEach(async function () {
-        this.token = await PayableToken.new(accounts[0]);
+        this.token = await PayableToken.new();
         await this.token.setRate(new BigNumber(1));
     });
 
     it('exchanges tokens for ether', async function () {
-        const tokenOwner = accounts[0];
         const contributor = accounts[1];
 
         const balanceBefore = await this.token.balanceOf(contributor);
         balanceBefore.should.be.bignumber.equal(0);
 
-        await web3.eth.sendTransaction({
+        await this.token.buyTokens.sendTransaction(contributor, {
             from: contributor,
             to: this.token.address,
             value: web3.toWei(1, 'ether')
