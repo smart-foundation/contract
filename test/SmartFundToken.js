@@ -1,39 +1,28 @@
-// 'use strict';
+'use strict';
 
-// contract('MyToken', function(accounts) {
-//     it("should assert true", function(done) {
-//         var my_token = MyToken.deployed();
-//         assert.isTrue(true);
-//         done();
-//     });
-// });
+const BigNumber = web3.BigNumber;
 
-// const SmartFundToken = artifacts.require('SmartFundToken');
+const SmartFundToken = artifacts.require('SmartFundTokenMock');
 
-// contract('SmartFundToken', accounts => {
+import EVMRevert from './helpers/EVMRevert';
 
-//     it('exchanges tokens for ether', async () => {
-//         const token = await SmartFundToken.new();
-//         debugger;
-//     });
+require('chai')
+  .use(require('chai-as-promised'))
+  .use(require('chai-bignumber')(BigNumber))
+  .should();
 
-//     // it('has a total supply and a creator', async function () {
-//     //     const owner = accounts[0]
-//     //     const myToken = await MyToken.new({ from: owner })
-//     //     const creator = await myToken.creator()
-//     //     const totalSupply = await myToken.totalSupply()
-//     //     assert(creator === owner)
-//     //     assert(totalSupply.eq(10000))
-//     // })
+contract('SmartFundToken', accounts => {
 
-//     // it('allows token transfers', async function () {
-//     //     const owner = accounts[0]
-//     //     const recipient = accounts[1]
-//     //     const myToken = await MyToken.new({ from: owner })
-//     //     await myToken.sendTokens(recipient, 10, { from: owner })
-//     //     const ownerBalance = await myToken.balanceOf(owner)
-//     //     assert(ownerBalance.eq(9990))
-//     //     const recipientBalance = await myToken.balanceOf(recipient)
-//     //     assert(recipientBalance.eq(10))
-//     // })
-// });
+    beforeEach(async function () {
+        this.contract = await SmartFundToken.new();
+        await this.contract.setRate(new BigNumber(1));
+    });
+
+    it('has fallback', async function () {
+        await web3.eth.sendTransaction({
+            from: accounts[1],
+            to: this.contract.address,
+            value: web3.toWei(1, 'ether')
+        });
+    });
+});
