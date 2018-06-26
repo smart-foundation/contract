@@ -54,14 +54,15 @@ contract('EtherStorage', accounts => {
         });
 
         const balanceBefore = await web3.eth.getBalance(accounts[0]);
-
-        await this.contract.etherWithdraw.sendTransaction(depositAmount, {
+        const hash = await this.contract.etherWithdraw.sendTransaction(depositAmount, {
             from: accounts[0],
             to: this.contract.address,
         });
-
         const balanceAfter = await web3.eth.getBalance(accounts[0]);
+        const txn = await web3.eth.getTransaction(hash);
+        const receipt = await web3.eth.getTransactionReceipt(hash);
+        const fee = txn['gasPrice'].mul(receipt['gasUsed']);
 
-        balanceAfter.sub(balanceBefore).should.be.bignumber.equal(10 ** 18);
+        balanceAfter.add(fee).sub(balanceBefore).should.be.bignumber.equal(depositAmount);
     });
 });
